@@ -27,12 +27,32 @@
 function fibonacci(n) {
   let serie = [0, 1];
 
-  for (let i = 2; i <= n; i++) {
-    serie.push(serie[i - 1] + serie[i - 3]);
+  for (let i = 1; i + 1 < n; i++) { //for (let i = 2; i <= n; i++)
+    serie.push(serie[i - 1] + serie[i]); //serie.push(serie[i - 1] + serie[i - 3]);
   }
 
   return serie;
 }
+
+/*
+  ERRORES ENCONTRADOS
+
+  Error 1 - Línea 30 - Tipo: LÓGICA
+  Qué pasaba: el bucle era "for (let i = 2; i <= n; i++)". Con n = 10 daba
+  9 vueltas, y como la serie ya empieza con 2 términos, salían 11 en vez de 10.
+  No salía ningún error en rojo: el programa terminaba, pero con un resultado incorrecto.
+  Cómo lo corregí: cambié el bucle a "for (let i = 1; i + 1 < n; i++)",
+  que da 8 vueltas: 2 términos iniciales + 8 = 10.
+
+  Error 2 - Línea 31 - Tipo: LÓGICA
+  Qué pasaba: se sumaba serie[i - 1] + serie[i - 3]. Fibonacci suma los DOS
+  términos anteriores, pero i - 3 se salta uno. En la primera vuelta (i = 2)
+  se pedía serie[-1], que no existe (undefined); 1 + undefined da NaN, y a partir
+  de ahí todos los términos salían NaN. Tampoco había error en rojo.
+  Cómo lo corregí: como mi i empieza en 1, serie[i] es el último término de la
+  serie y serie[i - 1] el penúltimo, así que la suma correcta es
+  serie[i - 1] + serie[i].
+*/
 
 let resultado = fibonacci(10);
 console.log("Serie:", resultado);
