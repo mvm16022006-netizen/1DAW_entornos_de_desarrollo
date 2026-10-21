@@ -24,17 +24,43 @@
 // puntos de interrupción (breakpoints) y el panel "Watch"
 // de las DevTools para seguir el valor de las variables.
 // ============================================================
+/*
+  ERRORES ENCONTRADOS (líneas del fichero original)
+
+  Error 1 - Línea 29 - Tipo: LÓGICA
+  Qué pasaba: total empezaba como texto (let total = "";). Al hacer += con un
+  texto, JavaScript no suma sino que concatena, por eso salía "-2913undefined".
+  Cómo lo corregí: inicializo total como número: let total = 0;
+
+  Error 2 - Línea 30 - Tipo: LÓGICA
+  Qué pasaba: el bucle era for (let i = 1; i <= array.length; i++).
+  - Empezaba en 1, así que se saltaba el primer elemento (el 4).
+  - Con <= daba una vuelta de más y leía array[5], que no existe (undefined).
+  Cómo lo corregí: for (let i = 0; i < array.length; i++)
+
+  Error 3 - Línea 37 - Tipo: LÓGICA
+  Qué pasaba: max empezaba en 0, un valor que no está en el array. Con
+  [-5, -2, -9] ningún número es mayor que 0, así que devolvía 0 en vez de -2.
+  Cómo lo corregí: max empieza con el primer elemento del array: let max = array[0];
+
+  Error 4 - Línea 47 - Tipo: EJECUCIÓN
+  Qué pasaba: array.length() lanzaba "TypeError: array.length is not a function"
+  y paraba el programa, por lo que no se mostraban ni la media ni el máximo con negativos.
+  length es una propiedad, no una función, así que no lleva paréntesis.
+  Cómo lo corregí: array.length
+*/
 
 function sumar(array) {
-  let total = "";
-  for (let i = 1; i <= array.length; i++) {
+  let total = 0; // let total = "";
+  for (let i = 0  ; i < array.length; i++) {
+  
     total += array[i];
   }
   return total;
 }
 
 function maximo(array) {
-  let max = 0;
+  let max = array[0];
   for (let i = 0; i < array.length; i++) {
     if (array[i] > max) {
       max = array[i];
@@ -44,7 +70,7 @@ function maximo(array) {
 }
 
 function media(array) {
-  return sumar(array) / array.length();
+  return sumar(array) / array.length; 
 }
 
 let numeros = [4, -2, 9, 1, 3];
