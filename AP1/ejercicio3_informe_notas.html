@@ -23,20 +23,20 @@
 // PISTA: no todos los errores muestran un mensaje en rojo.
 // ============================================================
 
-function crearInforme(nombre, notas) {
+function crearInforme(notas, nombre) {
   let suma = 0;
   for (let i = 0; i < notas.length; i++) {
     suma = suma + notas[i];
   }
 
-  const media = suma / notas.lenght;
+  const media = suma / notas.length; //const media = suma / notas.lenght;
 
   let resultado = "SUSPENSO";
   if (media >= 5) {
-    resultdo = "APROBADO";
+    resultado = "APROBADO";// resultdo = "APROBADO";
   }
 
-  media = media.toFixed(2);
+  
 
   return nombre + " tiene una media de " + media + " y su resultado es " + resultado;
 }
