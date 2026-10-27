@@ -22,8 +22,23 @@ function crearSaludo(nombre, hora) {
  
 let nombre = "Ana";
 let hora = 15;
-let mensaje = crearSaludo(hora, nombre);
+let mensaje = crearSaludo(nombre, hora); //let mensaje = crearSaludo(hora, nombre);
 console.log(mensaje);
+
+/*
+  ERRORES ENCONTRADOS
+
+  Error 1 - Línea 25 - Tipo: LÓGICA
+  Qué pasaba: la función se define como crearSaludo(nombre, hora), pero se
+  llamaba como crearSaludo(hora, nombre), con los argumentos al revés.
+  nombre recibía 15 y hora recibía "Ana". Al comparar "Ana" < 12, JavaScript
+  no puede convertir "Ana" a número (da NaN), y cualquier comparación con NaN
+  es false, así que siempre entraba en el else. Salía "Buenas noches, 15!"
+  sin ningún error en rojo.
+  Cómo lo corregí: puse los argumentos en el mismo orden que la definición:
+  crearSaludo(nombre, hora). Ahora sale "Buenas tardes, Ana!".
+*/
+
 </script>
 </body>
 </html>
