@@ -29,14 +29,14 @@ function crearInforme(notas, nombre) {
     suma = suma + notas[i];
   }
 
-  const media = suma / notas.length; //const media = suma / notas.lenght;
+  let media = suma / notas.length; //const media = suma / notas.lenght;
 
   let resultado = "SUSPENSO";
   if (media >= 5) {
     resultado = "APROBADO";// resultdo = "APROBADO";
   }
 
-  
+  media = media.toFixed(2);
 
   return nombre + " tiene una media de " + media + " y su resultado es " + resultado;
 }
@@ -46,6 +46,36 @@ let notasLuis = [3, 5, 4, 5];
 
 console.log(crearInforme(notasAna, "Ana"));
 console.log(crearInforme(notasLuis, "Luis"));
+
+/*
+  ERRORES ENCONTRADOS (líneas del fichero original)
+
+  Error 1 - Línea 32 - Tipo: LÓGICA
+  Qué pasaba: ponía notas.lenght (mal escrito). Esa propiedad no existe, así que
+  valía undefined, y suma / undefined daba NaN. No salía ningún error en rojo.
+  Cómo lo corregí: escribí bien la propiedad: notas.length
+
+  Error 2 - Línea 36 - Tipo: LÓGICA
+  Qué pasaba: ponía resultdo = "APROBADO" (mal escrito). JavaScript no da error:
+  crea una variable nueva llamada "resultdo", y la variable buena (resultado)
+  se quedaba siempre en "SUSPENSO", aunque la media fuera 5 o más.
+  Cómo lo corregí: escribí bien el nombre: resultado = "APROBADO"
+
+  Error 3 - Línea 39 - Tipo: EJECUCIÓN
+  Qué pasaba: media = media.toFixed(2) lanzaba "TypeError: Assignment to
+  constant variable" y paraba el programa, porque media estaba declarada con
+  const en la línea 32 y una constante no se puede reasignar.
+  Cómo lo corregí: en la línea 32 cambié const por let, para que media
+  se pueda modificar y mostrarse con 2 decimales (7.50).
+
+  Error 4 - Líneas 26, 47 y 48 - Tipo: LÓGICA
+  Qué pasaba: la función se definía como crearInforme(nombre, notas), pero se
+  llamaba como crearInforme(notasAna, "Ana"): los argumentos iban en orden
+  contrario, así que nombre recibía el array de notas y notas recibía el texto.
+  Cómo lo corregí: cambié el orden de los parámetros en la definición de la
+  función (línea 26) para que coincida con las llamadas: crearInforme(notas, nombre).
+*/
+
 </script>
 </body>
 </html>
